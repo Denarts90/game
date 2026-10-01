@@ -1,0 +1,72 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scripts/ui/menu_character.gd" id="1_character"]
+[ext_resource type="Texture2D" path="res://assets/characters/player/chare.png" id="2_texture"]
+
+[sub_resource type="Gradient" id="Gradient_shadow"]
+colors = PackedColorArray(0, 0, 0, 0.55, 0, 0, 0, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_shadow"]
+gradient = SubResource("Gradient_shadow")
+width = 256
+height = 256
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(1, 0.5)
+
+[node name="MenuCharacter" type="Node2D"]
+script = ExtResource("1_character")
+texture = ExtResource("2_texture")
+
+[node name="Shadow" type="Sprite2D" parent="."]
+position = Vector2(0, -8)
+scale = Vector2(1.6, 0.3)
+texture = SubResource("GradientTexture2D_shadow")
+
+[node name="Body" type="Polygon2D" parent="."]
+
+[node name="Skeleton2D" type="Skeleton2D" parent="."]
+
+[node name="hips" type="Bone2D" parent="Skeleton2D"]
+position = Vector2(0, -463)
+rest = Transform2D(1, 0, 0, 1, 0, -463)
+auto_calculate_length_and_angle = false
+length = 70.0
+bone_angle = -90.0
+
+[node name="spine" type="Bone2D" parent="Skeleton2D/hips"]
+position = Vector2(0, -70)
+rest = Transform2D(1, 0, 0, 1, 0, -70)
+auto_calculate_length_and_angle = false
+length = 70.0
+bone_angle = -90.0
+
+[node name="chest" type="Bone2D" parent="Skeleton2D/hips/spine"]
+position = Vector2(0, -70)
+rest = Transform2D(1, 0, 0, 1, 0, -70)
+auto_calculate_length_and_angle = false
+length = 155.0
+bone_angle = -90.0
+
+[node name="head" type="Bone2D" parent="Skeleton2D/hips/spine/chest"]
+position = Vector2(0, -155)
+rest = Transform2D(1, 0, 0, 1, 0, -155)
+auto_calculate_length_and_angle = false
+length = 180.0
+bone_angle = -90.0
+
+[node name="left_arm" type="Bone2D" parent="Skeleton2D/hips/spine/chest"]
+position = Vector2(-82, -92)
+rotation = 1.90553
+rest = Transform2D(-0.328521, 0.944497, -0.944497, -0.328521, -82, -92)
+auto_calculate_length_and_angle = false
+length = 345.0
+
+[node name="right_arm" type="Bone2D" parent="Skeleton2D/hips/spine/chest"]
+position = Vector2(82, -92)
+rotation = 1.23053
+rest = Transform2D(0.333739, 0.942666, -0.942666, 0.333739, 82, -92)
+auto_calculate_length_and_angle = false
+length = 345.0
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
