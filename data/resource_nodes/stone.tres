@@ -1,0 +1,24 @@
+[gd_resource type="Resource" script_class="ResourceNodeData" format=3]
+
+[ext_resource type="Script" path="res://scripts/data/loot_entry.gd" id="1_a3fhj"]
+[ext_resource type="Resource" path="res://data/items/stone.tres" id="2_nt6ha"]
+[ext_resource type="Script" path="res://scripts/data/resource_node_data.gd" id="3_flbg3"]
+
+[sub_resource type="Resource" id="Resource_dyhun"]
+script = ExtResource("1_a3fhj")
+item = ExtResource("2_nt6ha")
+max_amount = 2
+
+[resource]
+script = ExtResource("3_flbg3")
+display_name = "Камень"
+durability = 6
+hit_time = 1.5
+gather_type = 1
+loot = Array[ExtResource("1_a3fhj")]([SubResource("Resource_dyhun")])
+respawn_time = 20.0
+placeholder_shape = 3
+placeholder_size = Vector2(150, 115)
+placeholder_color = Color(0.58, 0.58, 0.62, 1)
+placeholder_accent_color = Color(0.4, 0.4, 0.44, 1)
+depleted_color = Color(0.32, 0.32, 0.34, 1)

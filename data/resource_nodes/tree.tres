@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="ResourceNodeData" format=3]
+
+[ext_resource type="Script" path="res://scripts/data/loot_entry.gd" id="1_4bdxc"]
+[ext_resource type="Resource" path="res://data/items/wood.tres" id="2_jh575"]
+[ext_resource type="Script" path="res://scripts/data/resource_node_data.gd" id="3_8sqh5"]
+
+[sub_resource type="Resource" id="Resource_rwtng"]
+script = ExtResource("1_4bdxc")
+item = ExtResource("2_jh575")
+max_amount = 2
+
+[resource]
+script = ExtResource("3_8sqh5")
+display_name = "Дерево"
+hit_time = 1.2
+loot = Array[ExtResource("1_4bdxc")]([SubResource("Resource_rwtng")])
+placeholder_shape = 2
+placeholder_size = Vector2(160, 240)
+placeholder_color = Color(0.22, 0.58, 0.27, 1)
+placeholder_accent_color = Color(0.45, 0.3, 0.15, 1)
+depleted_color = Color(0.42, 0.38, 0.32, 1)

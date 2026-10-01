@@ -1,6 +1,17 @@
 [gd_scene format=3]
 
-[ext_resource type="Script" path="res://scripts/game.gd" id="1_game"]
+[ext_resource type="Script" path="res://scripts/game/game.gd" id="1_game"]
+[ext_resource type="PackedScene" path="res://scenes/game/resource_node.tscn" id="2_node"]
+[ext_resource type="PackedScene" path="res://scenes/game/player.tscn" id="3_player"]
+[ext_resource type="Resource" path="res://data/resource_nodes/tree.tres" id="4_tree"]
+[ext_resource type="Resource" path="res://data/resource_nodes/stone.tres" id="5_stone"]
+[ext_resource type="Resource" path="res://data/resource_nodes/copper_vein.tres" id="6_copper"]
+[ext_resource type="Script" path="res://scripts/ui/resource_bar.gd" id="7_bar"]
+[ext_resource type="Script" path="res://scripts/data/item_data.gd" id="8_item_data"]
+[ext_resource type="Resource" path="res://data/items/wood.tres" id="9_wood"]
+[ext_resource type="Resource" path="res://data/items/stone.tres" id="10_stone_item"]
+[ext_resource type="Resource" path="res://data/items/copper_ore.tres" id="11_copper_item"]
+[ext_resource type="Script" path="res://scripts/ui/inventory_panel.gd" id="12_inventory"]
 
 [node name="Game" type="Control"]
 layout_mode = 3
@@ -9,16 +20,123 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 script = ExtResource("1_game")
 
-[node name="Label" type="Label" parent="."]
+[node name="LocationArea" type="Control" parent="."]
+unique_name_in_owner = true
+clip_contents = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 180.0
+offset_bottom = -500.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Background" type="ColorRect" parent="LocationArea"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_font_sizes/font_size = 56
-text = "Игра запущена! Esc — назад в меню"
-horizontal_alignment = 1
-vertical_alignment = 1
+mouse_filter = 2
+color = Color(0.36, 0.55, 0.3, 1)
+
+[node name="World" type="Node2D" parent="LocationArea"]
+unique_name_in_owner = true
+y_sort_enabled = true
+
+[node name="Tree1" parent="LocationArea/World" instance=ExtResource("2_node")]
+position = Vector2(190, 360)
+data = ExtResource("4_tree")
+
+[node name="Tree2" parent="LocationArea/World" instance=ExtResource("2_node")]
+position = Vector2(500, 340)
+data = ExtResource("4_tree")
+
+[node name="Tree3" parent="LocationArea/World" instance=ExtResource("2_node")]
+position = Vector2(860, 400)
+data = ExtResource("4_tree")
+
+[node name="Stone1" parent="LocationArea/World" instance=ExtResource("2_node")]
+position = Vector2(230, 840)
+data = ExtResource("5_stone")
+
+[node name="Stone2" parent="LocationArea/World" instance=ExtResource("2_node")]
+position = Vector2(850, 800)
+data = ExtResource("5_stone")
+
+[node name="CopperVein" parent="LocationArea/World" instance=ExtResource("2_node")]
+position = Vector2(560, 1100)
+data = ExtResource("6_copper")
+
+[node name="Player" parent="LocationArea/World" instance=ExtResource("3_player")]
+unique_name_in_owner = true
+position = Vector2(540, 640)
+
+[node name="TopPanel" type="PanelContainer" parent="."]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 180.0
+grow_horizontal = 2
+
+[node name="HBox" type="HBoxContainer" parent="TopPanel"]
+layout_mode = 2
+theme_override_constants/separation = 24
+
+[node name="ResourceBar" type="HBoxContainer" parent="TopPanel/HBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 48
+script = ExtResource("7_bar")
+items = Array[ExtResource("8_item_data")]([ExtResource("9_wood"), ExtResource("10_stone_item"), ExtResource("11_copper_item")])
+
+[node name="MenuButton" type="Button" parent="TopPanel/HBox"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(220, 120)
+layout_mode = 2
+size_flags_vertical = 4
+text = "Меню"
+
+[node name="BottomPanel" type="PanelContainer" parent="."]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -500.0
+grow_horizontal = 2
+grow_vertical = 0
+script = ExtResource("12_inventory")
+
+[node name="VBox" type="VBoxContainer" parent="BottomPanel"]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="Title" type="Label" parent="BottomPanel/VBox"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 52
+text = "Инвентарь"
+
+[node name="EmptyLabel" type="Label" parent="BottomPanel/VBox"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.7, 0.7, 0.75, 1)
+text = "Пусто. Нажмите на дерево или камень, чтобы начать добычу."
+autowrap_mode = 3
+
+[node name="Scroll" type="ScrollContainer" parent="BottomPanel/VBox"]
+layout_mode = 2
+size_flags_vertical = 3
+horizontal_scroll_mode = 0
+
+[node name="Items" type="VBoxContainer" parent="BottomPanel/VBox/Scroll"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 12

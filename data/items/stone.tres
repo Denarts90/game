@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="ItemData" format=3]
+
+[ext_resource type="Script" path="res://scripts/data/item_data.gd" id="1_nrqy1"]
+
+[resource]
+script = ExtResource("1_nrqy1")
+id = &"stone"
+display_name = "Камень"
+description = "Кусок камня."
+color = Color(0.62, 0.62, 0.65, 1)

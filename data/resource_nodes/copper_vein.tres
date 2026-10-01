@@ -1,0 +1,30 @@
+[gd_resource type="Resource" script_class="ResourceNodeData" format=3]
+
+[ext_resource type="Script" path="res://scripts/data/loot_entry.gd" id="1_snvdk"]
+[ext_resource type="Resource" path="res://data/items/copper_ore.tres" id="2_iob83"]
+[ext_resource type="Resource" path="res://data/items/stone.tres" id="3_f2pu5"]
+[ext_resource type="Script" path="res://scripts/data/resource_node_data.gd" id="4_d7dyp"]
+
+[sub_resource type="Resource" id="Resource_wsbor"]
+script = ExtResource("1_snvdk")
+item = ExtResource("2_iob83")
+chance = 0.7
+
+[sub_resource type="Resource" id="Resource_ykwfu"]
+script = ExtResource("1_snvdk")
+item = ExtResource("3_f2pu5")
+chance = 0.5
+
+[resource]
+script = ExtResource("4_d7dyp")
+display_name = "Медная жила"
+durability = 8
+hit_time = 1.8
+gather_type = 1
+loot = Array[ExtResource("1_snvdk")]([SubResource("Resource_wsbor"), SubResource("Resource_ykwfu")])
+respawn_time = 30.0
+placeholder_shape = 4
+placeholder_size = Vector2(170, 135)
+placeholder_color = Color(0.47, 0.44, 0.44, 1)
+placeholder_accent_color = Color(0.92, 0.52, 0.2, 1)
+depleted_color = Color(0.3, 0.28, 0.28, 1)
